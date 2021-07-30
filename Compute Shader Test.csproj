@@ -1,0 +1,12 @@
+<Project Sdk="Godot.NET.Sdk/3.3.0">
+    <PropertyGroup>
+        <TargetFramework>net472</TargetFramework>
+        <LangVersion>9.0</LangVersion>
+        <RootNamespace>ComputeShaderTest</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="GDMechanic" Version="1.0.0-alpha4" />
+        <PackageReference Include="System.Reactive" Version="4.4.1" />
+        <Reference Include="System" />
+    </ItemGroup>
+</Project>
