@@ -1,4 +1,5 @@
 #if TOOLS
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
@@ -107,11 +108,32 @@ namespace ComputeShaderTest.addons.computeshader
       return shaderMaterial;
     }
 
+    /// <summary>
+    /// Forces viewport to re render
+    /// </summary>
     protected virtual void _updateViewport()
     {
       Port.RenderTargetUpdateMode = Viewport.UpdateMode.Disabled;
       Port.UpdateWorlds();
       Port.RenderTargetUpdateMode = Viewport.UpdateMode.Once;
+    }
+
+    [Obsolete]
+    public static async Task<Image> Compute(Node parent, int width, int height, Shader shader, params ShaderParam[] shaderParams)
+    {
+      if (shader is null) throw new NullReferenceException($"{nameof(shader)} cannot be null");
+      if (width < 2) throw new ArgumentOutOfRangeException(nameof(width), "Minimum size for compute shader to work is 2x2");
+      if (height < 2) throw new ArgumentOutOfRangeException(nameof(height), "Minimum size for compute shader to work is 2x2");
+
+      var shaderNode = new ComputeShader
+      {
+        OutputSize = new Vector2(width, height),
+        Shader = shader
+      };
+      parent.AddChild(shaderNode);
+      await parent.ToSignal(shaderNode, "ready");
+
+      return await shaderNode.Compute(shaderParams);
     }
   }
 

@@ -1,13 +1,25 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://test/Test.cs" type="Script" id=1]
-[ext_resource path="res://addons/computeshader/ComputeShader.cs" type="Script" id=2]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+void fragment() {
+	COLOR = vec4(1.0, 0.0, 0.0, 1.0);
+}"
 
 [node name="Test" type="Node2D"]
-position = Vector2( 424.717, 250.753 )
+position = Vector2( 0.907074, 0 )
 script = ExtResource( 1 )
-
-[node name="ComputeShader" type="Node" parent="."]
-script = ExtResource( 2 )
+_shader = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 165.0
+margin_bottom = 60.0
+rect_scale = Vector2( 6.17917, 9.86067 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
