@@ -1,5 +1,7 @@
 # godot3-compute-shader
 
+## TODO: Write README
+
 Temporary work around around the lack of Compute Shaders in Godot 3.
 
 Uses shaders rendering in viewports to get data back as a texture, this approach is very limited but for many cases it
